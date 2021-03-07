@@ -33,6 +33,22 @@ CREATE TABLE Outfit
   CONSTRAINT Outfit_OutfitId_PK PRIMARY KEY (OutfitId)
 )ENGINE = INNODB;
 
+CREATE TABLE UserComment
+(
+  OutfitId            VARCHAR(150),
+  UserComment          VARCHAR(500),
+  UserCommentId        VARCHAR(150),
+  CONSTRAINT UserComment_OutfitId_FK FOREIGN KEY (OutfitId) REFERENCES Outfit (OutfitId)
+)ENGINE = INNODB;
+
+CREATE TABLE OutfitLikeUser
+(
+  OutfitId            VARCHAR(150),
+  LikeUserId          VARCHAR(150),
+  CONSTRAINT OutfitLikeUser_OutfitId_FK FOREIGN KEY (OutfitId) REFERENCES Outfit (OutfitId)
+)ENGINE = INNODB;
+
+
 CREATE TABLE Style
 (
   OutfitId            VARCHAR(150),
