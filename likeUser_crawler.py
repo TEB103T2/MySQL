@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup
 import csv
+import pymysql
 
 cluster = MongoClient('mongodb+srv://crawler:!QAZ2wsx@cluster0.k1oua.mongodb.net/wear?retryWrites=true&w=majority')
 db = cluster['wear']
@@ -43,10 +44,43 @@ for url in feature:
         break
     likeList.append(tempList2)
 # print(likeList)
-with open('likeuser.csv', 'w', newline='',  encoding="utf-8") as csvfile:
-    writer = csv.writer(csvfile)
-    for like in likeList:
-        for i in like:
-            writer.writerow([i[0],i[1]])
+# with open('likeuser.csv', 'w', newline='',  encoding="utf-8") as csvfile:
+#     writer = csv.writer(csvfile)
+#     for like in likeList:
+#         for i in like:
+#             writer.writerow([i[0],i[1]])
 
+
+#Insert to MySQL
+db_settings = {
+    "host": "127.0.0.1",
+    "port": 3306,
+    "user": "root",
+    "password": "12345678",
+    "db": "wear",
+    "charset": "utf8"
+}
+
+command = ''
+try:
+# 建立Connection物件
+    conn = pymysql.connect(**db_settings)
+    # 建立Cursor物件
+    with conn.cursor() as cursor:
+        for like in likeList:
+            for i in like:
+                try:
+                    command = f'INSERT INTO outfitlikeuser(OutfitId, LikeUserId)VALUES("{i[0]}", "{i[1]}");'
+                    cursor.execute(command)
+                except Exception as ex:
+                    print(ex)
+                    print(command)
+                print('down')
+    
+        # 儲存變更
+        conn.commit()
+    
+except Exception as ex:
+    print(ex)
+    print(command)
 
