@@ -7,4 +7,4 @@ outfit.py
 itemInfo.py  
 style.py  
 comment_crawler.py  執行後會直接塞進MySQL  
-likeUser.py         執行後會直接塞進MySQL
+likeUser_crawler.py         執行後會直接塞進MySQL
