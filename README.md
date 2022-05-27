@@ -1,10 +1,11 @@
-collection = db['Mondel_W'] 預設是Mondel_W,要換男生的話換成Mondel_M    
-順序  
-mysql_wear.sql  
+collection = db['Mondel_W'] There are two dbs Mondel_W(Women) and Mondel_M(Men)   
+Create database by mysql_wear.sql  
+
+Execute the following files in order
 userInfo.py  
 brand.py  
 outfit.py  
 itemInfo.py  
 style.py  
-comment_crawler.py  執行後會直接塞進MySQL  
-likeUser_crawler.py         執行後會直接塞進MySQL
+comment_crawler.py  
+likeUser_crawler.py        
